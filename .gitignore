@@ -1,1 +1,3 @@
-updateConfig.bat
+host.txt
+*.tar.gz
+*.img.gz
