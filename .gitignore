@@ -1,3 +1,4 @@
-host.txt
+settings.yaml
 *.tar.gz
 *.img.gz
+*.qcow2
