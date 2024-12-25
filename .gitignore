@@ -2,3 +2,4 @@ settings.yaml
 *.tar.gz
 *.img.gz
 *.qcow2
+.DS_Store
