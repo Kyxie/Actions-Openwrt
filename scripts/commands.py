@@ -7,10 +7,10 @@ class Commands:
         """Download .config from the menuconfig server to the local directory."""
         command = (
             f"scp -i {Constants.config_pem_path} "
-            f"{Constants.config_username}@{Constants.config_host}:{Constants.config_path} .."
+            f"{Constants.config_username}@{Constants.config_host}:{Constants.config_path} ."
         ) if Constants.config_pem_path else (
             f"sshpass -p '{Constants.config_password}' scp "
-            f"{Constants.config_username}@{Constants.config_host}:{Constants.config_path} .."
+            f"{Constants.config_username}@{Constants.config_host}:{Constants.config_path} ."
         )
         os.system(command)
 
