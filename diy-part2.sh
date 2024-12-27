@@ -11,23 +11,27 @@
 #
 
 # Modify default IP
-sed -i 's/192.168.1.1/192.168.1.250/g' package/base-files/files/bin/config_generate
+sed -i "/uci commit system/a\uci commit network/g" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit network/i\uci set network.lan.ipaddr='192.168.2.250'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit network/i\uci set network.lan.proto='static'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit network/i\uci set network.lan.type='bridge'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit network/i\uci set network.lan.ifname='eth0'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit network/i\uci set network.lan.netmask='255.255.255.0'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit network/i\uci set network.lan.gateway='192.168.2.1'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit network/i\uci set network.lan.dns='192.168.2.1'" package/lean/default-settings/files/zzz-default-settings
 
 # Modify default theme
-sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
+# sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 # Modify hostname
-sed -i '/uci commit system/i\uci set system.@system[0].hostname='KyxieWrt'' package/lean/default-settings/files/zzz-default-settings
-
-# Modify opkg sources to custom URLs
-cat > package/feeds/packages/opkg.conf <<EOF
-src/gz openwrt_core https://downloads.openwrt.org/releases/23.05.0/targets/x86/64/packages
-src/gz openwrt_base https://downloads.openwrt.org/releases/23.05.0/packages/x86_64/base
-src/gz openwrt_luci https://downloads.openwrt.org/releases/23.05.0/packages/x86_64/luci
-src/gz openwrt_packages https://downloads.openwrt.org/releases/23.05.0/packages/x86_64/packages
-src/gz openwrt_routing https://downloads.openwrt.org/releases/23.05.0/packages/x86_64/routing
-src/gz openwrt_telephony https://downloads.openwrt.org/releases/23.05.0/packages/x86_64/telephony
-EOF
+sed -i "/uci commit system/i\uci set system.@system[0].hostname='KyxieWrt'" package/lean/default-settings/files/zzz-default-settings
 
 # Set timezone to Toronto (Eastern Time)
-sed -i '/timezone='\''UTC'\''/a\\t\tset system.@system[-1].zonename='\''American/Toronto'\''' package/base-files/files/bin/config_generate
+sed -i "s/set system\.@system\[0\]\.timezone='CST-8'/set system.@system[0].timezone='EST5EDT'/" package/lean/default-settings/files/zzz-default-settings
+sed -i "s/set system\.@system\[0\]\.zonename='Asia\/Shanghai'/set system.@system[0].zonename='America\/Toronto'/" package/lean/default-settings/files/zzz-default-settings
+
+# Modify NTP Server
+sed -i "s/ntp1.aliyun.com/time.google.com/" package/lean/default-settings/files/zzz-default-settings
+sed -i "s/ntp.tencent.com/time.windows.com/" package/lean/default-settings/files/zzz-default-settings
+sed -i "s/ntp.ntsc.ac.cn/0.ca.pool.ntp.org/" package/lean/default-settings/files/zzz-default-settings
+sed -i "s/time.apple.com/1.ca.pool.ntp.org/" package/lean/default-settings/files/zzz-default-settings
