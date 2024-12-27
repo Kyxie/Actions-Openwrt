@@ -1,6 +1,6 @@
 # Scripts
 
-My local PC is Windows，So I need a Linux machine to generate `.config` file. Create a new file `Constants.py` under `\scripts`, for storing information for Linux and PVE server.
+A Linux machine is required to generate the `.config` file if your local PC's operating system is not Linux. Create a new file named `Constants.py` under the `\scripts` directory to store configuration details for the Linux and PVE servers.
 
 ```python
 # ./scripts/constants.py

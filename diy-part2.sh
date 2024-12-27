@@ -13,11 +13,12 @@
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.2.250/g' package/base-files/files/bin/config_generate
 
-# # Modify default theme
-# sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
+# Modify default theme
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 # Modify hostname
-sed -i 's/LEDE/KyxieWrt/g' package/base-files/files/bin/config_generate
+sed -i '/uci commit system/i\uci set system.@system[0].hostname='KyxieWrt'' package/lean/default-settings/files/zzz-default-settings
+# sed -i 's/OpenWrt/KyxieWrt/g' package/base-files/files/bin/config_generate
 
 # Modify opkg sources to custom URLs
 cat > package/feeds/packages/opkg.conf <<EOF

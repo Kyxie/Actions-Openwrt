@@ -36,7 +36,6 @@ class Commands:
             # Connect to the PVE server
             ssh.connect(Constants.pve_host, username=Constants.pve_username, key_filename=Constants.pve_pem_path if Constants.pve_pem_path else None, password=Constants.pve_password)
             
-            # Step 4: Define the decompression command (using gzip -d)
             # Decompress the .img.gz file
             decompression_command = f"gzip -d {Constants.pve_image_path}/{os.path.basename(Constants.local_image_path)}"
             
