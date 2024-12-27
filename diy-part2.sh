@@ -18,7 +18,6 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 
 # Modify hostname
 sed -i '/uci commit system/i\uci set system.@system[0].hostname='KyxieWrt'' package/lean/default-settings/files/zzz-default-settings
-# sed -i 's/OpenWrt/KyxieWrt/g' package/base-files/files/bin/config_generate
 
 # Modify opkg sources to custom URLs
 cat > package/feeds/packages/opkg.conf <<EOF
@@ -31,4 +30,4 @@ src/gz openwrt_telephony https://downloads.openwrt.org/releases/23.05.0/packages
 EOF
 
 # Set timezone to Toronto (Eastern Time)
-sed -i 's/option timezone.*/option timezone   "EST5EDT,M3.2.0,M11.1.0"/' package/base-files/files/bin/config_generate
+sed -i '/timezone='\''UTC'\''/a\\t\tset system.@system[-1].zonename='\''American/Toronto'\''' package/base-files/files/bin/config_generate
