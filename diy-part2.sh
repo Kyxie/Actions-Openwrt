@@ -30,4 +30,4 @@ src/gz openwrt_telephony https://downloads.openwrt.org/releases/23.05.0/packages
 EOF
 
 # Set timezone to Toronto (Eastern Time)
-sed -i 's/option timezone.*/option timezone   "EST5EDT,M3.2.0,M11.1.0"/' package/base-files/files/etc/config/system
+sed -i 's/option timezone.*/option timezone   "EST5EDT,M3.2.0,M11.1.0"/' package/base-files/files/bin/config_generate
