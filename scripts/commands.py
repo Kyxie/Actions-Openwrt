@@ -1,4 +1,5 @@
 import os
+import paramiko
 from constants import Constants
 
 class Commands:
@@ -27,3 +28,30 @@ class Commands:
             f"{Constants.pve_username}@{Constants.pve_host}:{Constants.pve_image_path}"
         )
         os.system(command)
+        try:
+            # Create an SSH client
+            ssh = paramiko.SSHClient()
+            ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            
+            # Connect to the PVE server
+            ssh.connect(Constants.pve_host, username=Constants.pve_username, key_filename=Constants.pve_pem_path if Constants.pve_pem_path else None, password=Constants.pve_password)
+            
+            # Step 4: Define the decompression command (using gzip -d)
+            # Decompress the .img.gz file
+            decompression_command = f"gzip -d {Constants.pve_image_path}/{os.path.basename(Constants.local_image_path)}"
+            
+            # Execute the decompression command
+            stdin, stdout, stderr = ssh.exec_command(decompression_command)
+            exit_status = stdout.channel.recv_exit_status()
+            
+            if exit_status == 0:
+                print("File decompression successful.")
+            else:
+                print("Error occurred during decompression.")
+                print(stderr.read().decode())
+            
+            # Close the SSH connection
+            ssh.close()
+        
+        except Exception as e:
+            print(f"An error occurred during SSH connection: {e}")
