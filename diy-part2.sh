@@ -26,6 +26,9 @@ sed -i "/uci commit network/i\uci set network.lan.dns='192.168.2.1'" package/lea
 # Modify hostname
 sed -i "/uci commit system/i\uci set system.@system[0].hostname='KyxieWrt'" package/lean/default-settings/files/zzz-default-settings
 
+# Midify default language
+sed -i '/uci commit system/i\uci set system.language=en_US' package/lean/default-settings/files/zzz-default-settings
+
 # Set timezone to Toronto (Eastern Time)
 sed -i "s/set system\.@system\[0\]\.timezone='CST-8'/set system.@system[0].timezone='EST5EDT'/" package/lean/default-settings/files/zzz-default-settings
 sed -i "s/set system\.@system\[0\]\.zonename='Asia\/Shanghai'/set system.@system[0].zonename='America\/Toronto'/" package/lean/default-settings/files/zzz-default-settings
