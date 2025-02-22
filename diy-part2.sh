@@ -12,7 +12,7 @@
 
 # Modify default IP
 sed -i "/uci commit system/a\uci commit network/g" package/lean/default-settings/files/zzz-default-settings
-sed -i "/uci commit network/i\uci set network.lan.ipaddr='192.168.2.250'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit network/i\uci set network.lan.ipaddr='192.168.2.66'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/uci commit network/i\uci set network.lan.proto='static'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/uci commit network/i\uci set network.lan.type='bridge'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/uci commit network/i\uci set network.lan.ifname='eth0'" package/lean/default-settings/files/zzz-default-settings
