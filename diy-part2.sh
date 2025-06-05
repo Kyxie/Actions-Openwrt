@@ -11,8 +11,8 @@
 #
 
 # Modify default IP
-sed -i "/uci commit system/a\uci commit network/g" package/lean/default-settings/files/zzz-default-settings
-sed -i "/uci commit network/i\uci set network.lan.ipaddr='192.168.2.66'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit system/a\uci commit network" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit network/i\uci set network.lan.ipaddr='192.168.2.22'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/uci commit network/i\uci set network.lan.proto='static'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/uci commit network/i\uci set network.lan.type='bridge'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/uci commit network/i\uci set network.lan.ifname='eth0'" package/lean/default-settings/files/zzz-default-settings
@@ -20,14 +20,21 @@ sed -i "/uci commit network/i\uci set network.lan.netmask='255.255.255.0'" packa
 sed -i "/uci commit network/i\uci set network.lan.gateway='192.168.2.1'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/uci commit network/i\uci set network.lan.dns='192.168.2.1'" package/lean/default-settings/files/zzz-default-settings
 
+# Disable DHCP
+sed -i "/uci commit network/a\uci commit dhcp" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit network/a\uci set dhcp.lan.ignore='1'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit network/a\uci set dhcp.lan.interface='lan'" package/lean/default-settings/files/zzz-default-settings
+
+
 # Modify default theme
 # sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 # Modify hostname
 sed -i "/uci commit system/i\uci set system.@system[0].hostname='KyxieWrt'" package/lean/default-settings/files/zzz-default-settings
 
-# Midify default language
-sed -i '/uci commit system/i\uci set system.language=en_US' package/lean/default-settings/files/zzz-default-settings
+# Modify default language
+sed -i "/uci commit system/a\uci commit luci" package/lean/default-settings/files/zzz-default-settings
+sed -i "/uci commit system/a\uci set luci.main.lang='en'" package/lean/default-settings/files/zzz-default-settings
 
 # Set timezone to Toronto (Eastern Time)
 sed -i "s/set system\.@system\[0\]\.timezone='CST-8'/set system.@system[0].timezone='EST5EDT'/" package/lean/default-settings/files/zzz-default-settings
