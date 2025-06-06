@@ -16,6 +16,3 @@
 # Add a feed source
 # echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 # echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
-
-# Ignore imx219 for now
-rm -f target/linux/bcm27xx/patches-6.6/950-0423-media-i2c-imx219-Correct-the-minimum-vblanking-value.patch
